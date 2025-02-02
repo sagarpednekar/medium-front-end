@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import Button from "./Button";
 
 interface ISignupProps {
   formType: "signin" | "signup";
@@ -16,7 +17,10 @@ export default function SignupForm({ formType }: ISignupProps) {
     password: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   async function submitForm() {
+    setIsSubmitting(true)
     try {
       console.log(formData);
       if (formType === "signup") {
@@ -40,6 +44,8 @@ export default function SignupForm({ formType }: ISignupProps) {
       }
     } catch (error) {
       alert("Sign Up Failed");
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -126,64 +132,16 @@ export default function SignupForm({ formType }: ISignupProps) {
             </div>
 
             <div className="mt-2">
-              <button
-                type="button"
-                className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-full"
-                onClick={submitForm}
-              >
-                {formType === "signin" ? "Login" : "Sign Up"}
-              </button>
+              <Button
+                variant="primary"
+                loading={isSubmitting}
+                onClickHandler={submitForm}
+                label={formType === "signin" ? "Login" : "Sign Up"}
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-
-  {
-    /* interface IInputBox {
-    label: string;
-    placeholder: string;
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-    type: "text" | "email" | "password";
-    name?: string;
-  }
-
-  interface IButton {
-    label: string;
-  }
-
-  function InputBox({ label, placeholder, onChange, type, ref }: IInputBox) {
-    return (
-      <div className="mt-4">
-        <label
-          htmlFor="first_name"
-          className="block mb-2 text-sm font-medium text-gray-900"
-        >
-          {label}
-        </label>
-        <input
-          type={type}
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5  placeholder-gray-400  focus:ring-blue-500 focus:border-blue-500"
-          placeholder={placeholder}
-          required
-          ref={ref}
-        />
-      </div>
-    );
-  }
-
-  function Button({ label }: IButton) {
-    return (
-      <div className="mt-2">
-        <button
-          type="button"
-          className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 w-full"
-        >
-          {label}
-        </button>
-      </div>
-    );
-  } */
-  }
 }

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import { BACKEND_URL } from "../config";
 import { useNavigate } from "react-router-dom";
-import Spinner from "./Spinner";
+import Button from "./Button";
 
 export default function AddBlogForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,16 +68,7 @@ export default function AddBlogForm() {
                         ref={postRef}
                     ></textarea>
                 </div>
-                <button
-                    type="submit"
-                    className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800"
-                    onClick={publishPost}
-                    disabled={isSubmitting}
-                >
-                    {isSubmitting ?
-                        <Spinner /> : null}
-                    Publish post
-                </button>
+                <Button label="Publish post" loading={isSubmitting} onClickHandler={publishPost} variant="green" />
             </div>
         </div>
     );
