@@ -1,4 +1,3 @@
-import useBlog from "../hooks/useBlog";
 import { IBlogCardProps } from "./BlogCard";
 import BlogSkeleton from "./BlogSkeleton";
 interface IBlogProps {
@@ -7,7 +6,6 @@ interface IBlogProps {
 }
 
 export default function Blog({ blog, loading }: IBlogProps) {
-    // const { blog, loading } = useBlog();
     if (loading) {
         return <div><BlogSkeleton shimmerType="blog" /></div>;
     }
