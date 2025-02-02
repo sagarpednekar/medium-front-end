@@ -9,7 +9,7 @@ export default function ViewBlog() {
   return (
     <div>
       <Appbar />
-      <div className="grid grid-cols-12 w-full mt-4 p-4">
+      <div className="grid grid-cols-12 gap-5 w-full mt-4 p-4">
         <div className="col-span-8 ">
           <Blog blog={blog} loading={loading} />
         </div>

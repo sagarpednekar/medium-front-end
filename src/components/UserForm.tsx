@@ -25,9 +25,6 @@ export default function SignupForm({ formType }: ISignupProps) {
           ...formData,
         });
         console.log("response", response);
-
-        debugger;
-
         alert("Sign Up Successful");
         debugger;
         navigate("/signin");
@@ -48,7 +45,6 @@ export default function SignupForm({ formType }: ISignupProps) {
 
   return (
     <div className="h-screen flex flex-col justify-center">
-      {JSON.stringify(formData)}
       <div className="flex justify-center">
         <div>
           <div className="px-10 text-center">

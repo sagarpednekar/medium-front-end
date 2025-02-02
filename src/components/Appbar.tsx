@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Avatar from "./Avatar";
+import useAuth from "../hooks/useAuth";
 
 export default function Appbar() {
     const navigate = useNavigate();
     const location = useLocation();
+    const { isAuthenticated } = useAuth()
 
     return (
         <div className="flex justify-between items-center p-4 border-b border-gray-300">
@@ -11,7 +12,7 @@ export default function Appbar() {
                 navigate("/")
             }} >Medium</div>
 
-            <div className="flex">
+            <div className="flex items-center">
                 <div>
                     {location.pathname !== "/create-blog-post" ?
                         <button
@@ -27,7 +28,26 @@ export default function Appbar() {
                     }
 
                 </div>
-                <Avatar username="Sagar Pednekar" />
+                <div>
+                    {isAuthenticated ?
+                        <button
+                            type="button"
+                            className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 "
+                            onClick={() => {
+                                if (isAuthenticated) {
+                                    localStorage.removeItem("token")
+                                    navigate("/signin")
+                                }
+
+
+                            }}
+                        >
+                            Sign Out
+                        </button> : null
+                    }
+
+                </div>
+
             </div>
         </div>
     );
